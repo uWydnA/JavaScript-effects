@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>打砖块</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #666;
+        }
+
+        .box {
+            width: 1000px;
+            height: 500px;
+            position: relative;
+            margin: 100px auto;
+            background: #777;
+            overflow: hidden;
+        }
+
+        .box .target {
+            width: 800px;
+            position: relative;
+        }
+
+        .box .target .tar {
+            width: 100px;
+            height: 30px;
+            background: #ff9;
+            border: 1px solid #333;
+            box-shadow: 0 0 5px #000;
+            box-sizing: border-box;
+            position: absolute;
+        }
+
+        .box .ball {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            background: #cec;
+            border-radius: 50%;
+            left: 485px;
+            top: 420px
+        }
+
+        .box .board {
+            width: 150px;
+            height: 20px;
+            border-radius: 10px;
+            background: #282828;
+            position: absolute;
+            left: 425px;
+            top: 450px;
+        }
+
+        .win {
+            transition: 2s;
+            opacity: 0;
+            position: absolute;
+            width: 600px;
+            height: 80px;
+            border-radius: 20px;
+            box-shadow: 0 0 5px #666;
+            left: 0;
+            right: 0;
+            top: 200px;
+            margin: auto;
+            text-align: center;
+            font: 30px/80px "";
+            color: #fff;
+            border: 1px solid rgba(00, 00, 00, .2);
+            background-color: #BB0033;
+            background-image:
+                -webkit-radial-gradient(closest-side circle at 60% 43%, #BB0033 26%, rgba(187, 0, 51, 0) 27%),
+                -webkit-radial-gradient(closest-side circle at 40% 43%, #BB0033 26%, rgba(187, 0, 51, 0) 27%),
+                -webkit-radial-gradient(closest-side circle at 40% 22%, #DD3355 45%, rgba(221, 51, 85, 0) 46%),
+                -webkit-radial-gradient(closest-side circle at 60% 22%, #DD3355 45%, rgba(221, 51, 85, 0) 46%),
+                -webkit-radial-gradient(closest-side circle at 50% 35%, #DD3355 30%, rgba(221, 51, 85, 0) 31%),
+                -webkit-radial-gradient(closest-side circle at 60% 43%, #BB0033 26%, rgba(187, 0, 51, 0) 27%),
+                -webkit-radial-gradient(closest-side circle at 40% 43%, #BB0033 26%, rgba(187, 0, 51, 0) 27%),
+                -webkit-radial-gradient(closest-side circle at 40% 22%, #DD3355 45%, rgba(221, 51, 85, 0) 46%),
+                -webkit-radial-gradient(closest-side circle at 60% 22%, #DD3355 45%, rgba(221, 51, 85, 0) 46%),
+                -webkit-radial-gradient(closest-side circle at 50% 35%, #DD3355 30%, rgba(221, 51, 85, 0) 31%);
+            background-image:
+                radial-gradient(closest-side circle at 60% 43%, #BB0033 26%, rgba(187, 0, 51, 0) 27%),
+                radial-gradient(closest-side circle at 40% 43%, #BB0033 26%, rgba(187, 0, 51, 0) 27%),
+                radial-gradient(closest-side circle at 40% 22%, #DD3355 45%, rgba(221, 51, 85, 0) 46%),
+                radial-gradient(closest-side circle at 60% 22%, #DD3355 45%, rgba(221, 51, 85, 0) 46%),
+                radial-gradient(closest-side circle at 50% 35%, #DD3355 30%, rgba(221, 51, 85, 0) 31%),
+                radial-gradient(closest-side circle at 60% 43%, #BB0033 26%, rgba(187, 0, 51, 0) 27%),
+                radial-gradient(closest-side circle at 40% 43%, #BB0033 26%, rgba(187, 0, 51, 0) 27%),
+                radial-gradient(closest-side circle at 40% 22%, #DD3355 45%, rgba(221, 51, 85, 0) 46%),
+                radial-gradient(closest-side circle at 60% 22%, #DD3355 45%, rgba(221, 51, 85, 0) 46%),
+                radial-gradient(closest-side circle at 50% 35%, #DD3355 30%, rgba(221, 51, 85, 0) 31%);
+            background-position: 0 0%, 0 0%, 0 0%, 0 0%, 0 0%, 50px 50px, 50px 50px, 50px 50px, 50px 50px, 50px 50px;
+            background-size: 100px 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="target"></div>
+        <div class="ball"></div>
+        <div class="board"></div>
+        <div class="win">顺利通关</div>
+    </div>
+
+</body>
+<script>
+    function BoardMove(num) {
+        this.target = document.querySelector(".box .target");
+        this.win = document.querySelector(".win")
+        this.index = -1;
+        for (let i = 0; i < num; i++) {
+            this.index++;
+            if (i % 8 == 0) {
+                this.index = 0;
+            }
+            let tar = document.createElement("div");
+            tar.className = "tar";
+            tar.style.left = 100 + (this.index) * 100 + "px";
+
+            tar.style.top = 50 + (Math.floor(i / 8)) * 30 + "px";
+            this.target.appendChild(tar);
+        }
+        this.box = this.target.children;
+        for (var i = 0; i < this.box.length; i++) {
+            this.index++;
+            if (i % 8 == 0) {
+                this.index = 0;
+            }
+            this.box[i].boxleft = 100 + (this.index) * 100;
+            this.box[i].boxtop = 60 + (Math.floor(i / 8)) * 30;
+        }
+        this.board = document.querySelector(".box .board");
+        this.boardl = parseInt(getComputedStyle(this.board).left);
+        this.boardt = parseInt(getComputedStyle(this.board).top);
+        this.ball = document.querySelector(".ball");
+        this.movex = parseInt(getComputedStyle(this.ball).left);
+        this.movey = parseInt(getComputedStyle(this.ball).top);
+        this.x;
+        this.y;
+        this.ballstep = 10;
+        this.boardmove();
+        this.t1;
+    }
+    BoardMove.prototype.boardmove = function () {
+        var that = this;
+        var step = 60;
+        var iNowb = parseInt(getComputedStyle(this.board).left);
+        document.onkeydown = function (eve) {
+            let e = eve || window.event;
+            let code = e.keyCode || e.srcElment;
+            iNow = parseInt(getComputedStyle(that.board).left);
+            that.movex = parseInt(getComputedStyle(that.ball).left);
+            that.movey = parseInt(getComputedStyle(that.ball).top);
+            switch (code) {
+                case 37: {
+                    that.board.style.left = iNow - step + "px";
+                    if (that.x == undefined) {
+                        that.x = 0;
+                    }
+                    if (iNow - 0 <= step) {
+                        that.board.style.left = 0;
+                    }
+                    break;
+                }
+                case 39: {
+                    that.board.style.left = iNow + step + "px";
+                    if (that.x == undefined) {
+                        that.x = 1;
+                        console.log(that.x)
+                    }
+                    if ((1000 - that.board.offsetWidth - iNow) <= step) {
+                        that.board.style.left = 1000 - that.board.offsetWidth + "px";
+                    }
+                    break;
+                }
+            }
+            that.ballmove();
+        }
+    }
+    BoardMove.prototype.ballmove = function () {
+        clearInterval(this.t1)
+        this.t1 = setInterval(() => {
+            this.movex = parseInt(getComputedStyle(this.ball).left);
+            this.movey = parseInt(getComputedStyle(this.ball).top);
+            this.ballcrash();
+            if (this.x == 0 && this.y == 0) {
+                this.ball.style.left = this.movex - this.ballstep + "px";
+                this.ball.style.top = this.movey + this.ballstep + "px";
+            }
+            if (this.x == 1 && this.y == 1) {
+                this.ball.style.left = this.movex + this.ballstep + "px";
+                this.ball.style.top = this.movey - this.ballstep + "px";
+            }
+            if (this.x == 1 && this.y == 0) {
+                this.ball.style.left = this.movex + this.ballstep + "px";
+                this.ball.style.top = this.movey + this.ballstep + "px";
+            }
+            if (this.x == 0 && this.y == 1) {
+                this.ball.style.left = this.movex - this.ballstep + "px";
+                this.ball.style.top = this.movey - this.ballstep + "px";
+            }
+        }, 30);
+    }
+    BoardMove.prototype.ballcrash = function () {
+        this.movex = parseInt(getComputedStyle(this.ball).left);
+        this.movey = parseInt(getComputedStyle(this.ball).top);
+        this.boardl = parseInt(getComputedStyle(this.board).left);
+        this.boardt = parseInt(getComputedStyle(this.board).top);
+        this.box = this.target.children;
+        if (this.box.length == 0) {
+            this.win.style.opacity = "1";
+            this.x = 2;
+            this.y = 2;
+        }
+        for (var i = 0; i < this.box.length; i++) {
+            if (this.movex >= this.box[i].boxleft && this.movex <= this.box[i].boxleft + 100 && this.movey <= this
+                .box[i].boxtop && this.box[i].boxtop - this.movey <= this.ballstep) {
+                this.y = 1;
+                this.ball.style.top = this.box[i].boxtop - 30 + "px"
+                this.box[i].remove();
+                i--;
+            }
+            if (this.movex >= this.box[i].boxleft && this.movex <= this.box[i].boxleft + 100 && this.movey >= this
+                .box[i].boxtop && this.movey - this.box[i].boxtop <= this.ballstep) {
+                this.y = 0;
+                this.ball.style.top = this.box[i].boxtop + 30 + 30 + "px";
+                this.box[i].remove();
+                i--;
+            }
+        }
+        if (this.movex - 0 <= this.ballstep) {
+            this.ball.style.left = 0;
+            this.x = 1
+        }
+        if (970 - this.movex <= this.ballstep) {
+            this.ball.style.left = 970 + "px";
+            this.x = 0
+        }
+        if (this.movey == 0) {
+            this.y = 0;
+        }
+
+        if (420 - this.movey <= this.ballstep && this.movex >= this.boardl && this.movex <= this.boardl + 150 &&
+            this.movey <= 500) {
+            this.ball.style.top = 420 + "px";
+            this.y = 1;
+        }
+
+    }
+    new BoardMove(32)
+</script>
+
+</html>
