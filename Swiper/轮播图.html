@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+    <style>
+        .box {
+            width: 1380px;
+            height: 350px;
+            margin: 200px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ;
+
+        .box .img {}
+
+        .box .img a {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .box .btns div {
+            height: 60px;
+            width: 60px;
+            position: absolute;
+            top: 150px;
+            background: rgba(0, 0, 0, .4);
+            border-radius: 50%;
+            font: 20px/60px "";
+            text-align: center;
+            color: #fff;
+            z-index: 9999999;
+            user-select: none;
+            display: none;
+        }
+
+        .box .btns .left {
+            left: 50px;
+        }
+
+        .box .btns .right {
+            left: 1270px;
+        }
+
+        .box .img a:first-child {
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="img">
+            <a href="#"><img src="images/0.jpg" alt=""></a>
+            <a href="#"><img src="images/1.jpg" alt=""></a>
+            <a href="#"><img src="images/2.jpg" alt=""></a>
+            <a href="#"><img src="images/3.jpg" alt=""></a>
+        </div>
+        <div class="btns">
+            <div class="left">&lt;</div>
+            <div class="right">&gt;</div>
+        </div>
+    </div>
+</body>
+<script>
+    function Tap() {
+        this.box = document.querySelector(".box");
+        this.left = document.querySelector(".left");
+        this.right = document.querySelector(".right");
+        this.img = document.querySelectorAll(".box .img a");
+        this.btns = document.querySelectorAll(".box .btns div");
+        this.index = 0;
+        this.zIndex = 1;
+        this.prevI;
+        this.target = 1000;
+        this.addEvent();
+    }
+    Tap.prototype.addEvent = function () {
+        var that = this;
+        this.left.onclick = function () {
+            that.changeIndexL();
+        }
+        this.right.onclick = function () {
+            that.changeIndexR();
+        }
+        this.over()
+        this.out();
+    }
+    Tap.prototype.changeIndexL = function () {
+        if (this.index == 0) {
+            this.index = this.img.length - 1;
+            this.prevI = 0;
+        } else {
+            this.index--;
+            this.prevI = this.index + 1;
+        }
+        this.changeImg(1);
+    }
+    Tap.prototype.changeIndexR = function () {
+        if (this.index == this.img.length - 1) {
+            this.index = 0;
+            this.prevI = this.img.length - 1;
+        } else {
+            this.index++;
+            this.prevI = this.index - 1;
+        }
+        this.changeImg(-1);
+    }
+    Tap.prototype.changeImg = function (d) {
+        this.img[this.index].style.zIndex = ++this.zIndex;
+        this.img[this.index].style.left = -1380 * d + "px";
+        this.move(this.img[this.index], {
+            left: 0
+        });
+        this.img[this.prevI].style.left = 0 + "px";
+        this.move(this.img[this.prevI], {
+            left: 1380 * d
+        });
+    }
+    Tap.prototype.move = function (ele, obj) {
+        clearInterval(ele.t1);
+        ele.t1 = setInterval(() => {
+            for (var i in obj) {
+                let iNow = parseInt(getComputedStyle(ele)[i]);
+                let step = (obj[i] - iNow) / 10;
+                console.log(step)
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (iNow == obj[i]) {
+                    clearInterval(ele.t1);
+                } else {
+                    console.log(obj[i])
+                    console.log(iNow)
+                    ele.style[i] = iNow + step + "px";
+                }
+            }
+
+        }, 30);
+    }
+    Tap.prototype.over = function () {
+        var that = this;
+        this.box.onmouseover = function () {
+            for (var i = 0; i < that.btns.length; i++) {
+                that.btns[i].style.display = "block";
+            }
+        }
+    }
+    Tap.prototype.out = function () {
+        var that = this;
+        this.box.onmouseout = function () {
+            for (var i = 0; i < that.btns.length; i++) {
+                that.btns[i].style.display = "none";
+            }
+        }
+    }
+    new Tap();
+</script>
+
+</html>
