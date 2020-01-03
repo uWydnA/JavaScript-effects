@@ -1,0 +1,15 @@
+.map{width: 320px;height: 568px;box-sizing: border-box;position: absolute;left: 700px;}
+
+.map .start{width: 320px;height: 568px;margin: 0 auto;box-sizing: border-box;position: relative;background: url(../image/开始背景.png)no-repeat center; }
+.map .start .btn{position: absolute;left: 0;right: 0;top: 470px;margin:0 auto;width: 200px;height: 40px;border-radius: 20px;border: 1px solid #000;text-align: center;font:16px/40px "";user-select: none;}
+
+
+.map .game{width: 320px;height: 568px;margin: 0 auto;box-sizing: border-box;position: relative;background: url(../image/background_1.png)  center;display: none;}
+.map .game .plane{width: 66px;height: 80px;background: url(../image/我的飞机.gif) no-repeat center;position: absolute;left: 127px;top: 450px;}
+
+.bullet{position: absolute;width: 6px;height: 14px;background: url(../image/bullet1.png) no-repeat center;}
+
+
+.map .game .score{position: absolute;top: 0;left: 10px;height: 30px;font:20px/30px "";width: 200px;user-select: none;}
+.map .game .score .fen{float: left;}
+.map .game .score .shu{float: left;}
