@@ -123,8 +123,8 @@ define(["js/module/move"], function (move) {
                                     }
                                 })
                             }
-                            this.style.display = "none"
                             this.parentNode.style.height = "auto"
+                            this.remove();
                         }
                     }
                 });
