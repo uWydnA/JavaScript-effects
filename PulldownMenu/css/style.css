@@ -1,0 +1,150 @@
+html {
+    font-size: 9.2592vw;
+}
+
+html,
+body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    outline: none;
+}
+
+#header {
+    height: 1.32rem;
+    background: #098fe4;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0
+}
+
+#header p {
+    font: .56rem/1.32rem "";
+    color: #fff;
+}
+
+#headert {
+    height: 1.32rem;
+}
+
+#main {
+    display: block;
+}
+
+#main .box {}
+
+#main .box li {
+    text-indent: 1em;
+    border-bottom: .01rem solid #ccc;
+    overflow: hidden;
+}
+
+#main .box li .one {
+    padding: .5rem 0;
+}
+
+#main .box li .one a {
+    font: .56rem/1.32rem "";
+    float: left;
+}
+
+#main .box li .one span {
+    font: .28rem/1.32rem "";
+    float: left;
+}
+
+#main .box li .one i {
+    color: #666;
+    margin-right: .5rem;
+    font: .28rem/1.32rem "";
+    float: right;
+    width: 2rem;
+    text-indent: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+#main .box li .two {
+    overflow: hidden;
+    height: 0;
+}
+
+#main .box li .twobox {
+    background-color: #ccc;
+    padding: .5rem 0;
+}
+
+#main .box li .twobox .left {
+    float: left;
+}
+
+#main .box li .twobox .left a {
+    font: .56rem/1.32rem "";
+    float: left;
+}
+
+#main .box li .twobox .left span {
+    font: .28rem/1.32rem "";
+    float: left;
+}
+
+#main .box li .twobox button {
+    margin-right: 1rem;
+    float: right;
+    border: 0;
+    color: #fff;
+    background-color: #ff9800;
+    text-align: center;
+    box-shadow: 0 0 5px #000;
+    width: 2rem;
+    font: .56rem/1.32rem "";
+}
+
+#main .box li .twobox button:hover {
+    background-color: #ff6855;
+}
+
+.cheack {
+    height: 1.32rem;
+    border-bottom: .01rem solid #ccc;
+    text-align: center;
+    font: .28rem/1.32rem "";
+    display: none;
+
+}
+
+.cheacked {
+    height: 1.32rem;
+    border-bottom: .01rem solid #ccc;
+    text-align: center;
+    font: .28rem/1.32rem "";
+}
+
+.hui {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+    position: fixed;
+    z-index: 1111;
+    display: none;
+}
+
+.hui .cont {
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+    text-align: center;
+    font: 1.32rem/5rem "";
+}

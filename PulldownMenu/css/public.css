@@ -1,0 +1,137 @@
+body,
+ol,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dd,
+fieldset,
+legend,
+input,
+textarea,
+select {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 12px "宋体";
+    word-wrap: break-word;
+}
+
+a,
+u,
+s,
+del {
+    color: #666;
+    text-decoration: none
+}
+
+fieldset,
+a img,
+.bor0 {
+    border: 0;
+}
+
+i,
+em,
+b {
+    font-style: normal;
+    font-weight: 100;
+}
+
+li {
+    list-style: none;
+}
+
+img {
+    vertical-align: middle;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.ind2 {
+    text-indent: 2em;
+}
+
+.txt,
+.sub {
+    border: 0;
+    background: none;
+}
+
+
+/*图片居中*/
+.valign {
+    text-align: center;
+}
+
+.valign img {
+    vertical-align: middle;
+}
+
+.valign:after {
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* 清除浮动 */
+.clear::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* 阻止margin-top向父元素传递 */
+.clear::before {
+    content: "";
+    display: table;
+}
+
+/* 实现header，img左浮动，nav右浮动效果 */
+.header .logo {
+    float: left;
+}
+
+.header ul {
+    float: right;
+}
+
+.header ul li {
+    float: left;
+    text-align: center;
+}
+
+.header ul li a {
+    display: block;
+}
+
+/* 实现类导航的效果 */
+.nav {
+    float: left;
+}
+
+.nav li {
+    float: left;
+    text-align: center;
+}
+
+.nav li a {
+    display: block;
+}
+
+/* 单行文本省略号 */
+.omit {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
